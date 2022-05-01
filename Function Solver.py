@@ -1,6 +1,7 @@
-from simpleeval import simple_eval
+from sympy import symbols, substitution 
 
 
+x = symbols('x')
 vals1 = [] #? Enter a list of values of x
 vals2 = [] #? init for looping
 
@@ -10,18 +11,24 @@ def doRng(minimum,maximum):
         vals2.append(n)
     return vals2
 
-#* Define function-----------------------------------------------------------------------------------------------------------------------
 def f(x):
     return (-2*(x**2)-5) #?<-----enter question here
 
-#* Define function-----------------------------------------------------------------------------------------------------------------------
+# prompt the user for the expression 
+# returns valid expression  
+def getExpression():
+    while(True):
+        try:
+            exp = str(input("Enter an equation to solve for a single variable (x):\n> "))
+            break
+        except:
+            print("oops... Try again \n")
+    return exp
 
-
-def do(v=vals1):
-    print("\n")
+def generateOrderedPairs(v=vals1):
     for n in v:
-        print(f"({n}, {f(n)})")
-    print("\n")
+        print(f"({n}, {(expression)})")
+        
 
 def mathHelper9000():
     asking = True
@@ -36,7 +43,9 @@ def mathHelper9000():
                         vals1.append(nval)
                 except: 
                     print("oops... \n\n\n\n")
-                do(vals1) 
+                print("\n")    
+                generateOrderedPairs(vals1) 
+                print("\n")
             elif (ans == "range"):
                 try:
                     minimum = int(input("Enter a minimum x value: "))
@@ -45,11 +54,16 @@ def mathHelper9000():
                     print("oops... \n\n\n\n")
                     
                 doRng(minimum,maximum)
-                do(vals2)
+                print("\n")    
+                generateOrderedPairs(vals2) 
+                print("\n")
             else:
                 print("kthxbai")
                 asking = False
         except:
             print("oops\n\n\n")
-    print("\n"*80)
+            
+    print("\n"*5)
+    
+expression = getExpression()
 mathHelper9000()
