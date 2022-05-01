@@ -1,3 +1,6 @@
+from simpleeval import simple_eval
+
+
 vals1 = [] #? Enter a list of values of x
 vals2 = [] #? init for looping
 
