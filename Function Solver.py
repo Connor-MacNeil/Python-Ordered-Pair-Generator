@@ -1,52 +1,63 @@
-vals1 = [] #? Enter a list of values of x
-vals2 = [] #? init for looping
+# list of values of x
+xValues = []
 
-def doRng(minimum,maximum):
-    #*ENTER RANGE (MIN,MAX+1)
-    for n in range(minimum,maximum):
-        vals2.append(n)
-    return vals2
+# Prompts the user for a minimum and maximum value, 
+# returns a list of values within given range
+def getRange():
+    while(True):
+        try:
+            minimum = int(input("Enter a minimum x value: "))
+            maximum = int(input("Enter a maximum x value: "))
+        except: 
+            print("Error: Not a valid integer.")
+        break
+    for n in range(minimum, (maximum)+1):
+        xValues.append(n)
+    return xValues
 
-#* Define function-----------------------------------------------------------------------------------------------------------------------
-def f(x):
-    return (-2*(x**2)-5) #?<-----enter question here
+# Prompts the user for a number of x values then, what each value is
+# Returns the list of values
+def getManual():
+    try:
+        howMany = int(input("How many x values?: "))
+        for i in range(0, howMany):
+            nval = int(input("Enter an x value: "))
+            xValues.append(nval)
+    except:
+        print("oops... \n\n\n\n")
+    return xValues
 
-#* Define function-----------------------------------------------------------------------------------------------------------------------
+# Prompt the user for the expression
+# Returns valid expression
+def getExpression():
+    while(True):
+        try:
+            exp = str(input("Enter an equation to solve for a single variable (x):\n> "))
+            break
+        except:
+            print("oops... Try something like this: '(2 + 4) * x - 8' \n")
+    return exp
 
-
-def do(v=vals1):
-    print("\n")
-    for n in v:
-        print(f"({n}, {f(n)})")
-    print("\n")
-
-def mathHelper9000():
+# Prompt user for type of coordinate generation
+# runs the function corresponding to the choice 
+# returns the x values list
+def getXValues():
     asking = True
     while (asking):
         try:
-            ans = str(input("\nMANUAL x values OR RANGE of x:\n> "))
+            print("Enter 'manual' for specific x values \nOR\nEnter 'range' for a range of x values")
+            ans = str(input("> "))
             if (ans == "manual"):
-                try:
-                    howMany = int(input("How many x values?: "))
-                    for i in range(0,howMany):
-                        nval = int(input("Enter an x value: "))
-                        vals1.append(nval)
-                except: 
-                    print("oops... \n\n\n\n")
-                do(vals1) 
-            elif (ans == "range"):
-                try:
-                    minimum = int(input("Enter a minimum x value: "))
-                    maximum = int(input("Enter a MAXIMUM x value: "))
-                except: 
-                    print("oops... \n\n\n\n")
-                    
-                doRng(minimum,maximum)
-                do(vals2)
-            else:
-                print("kthxbai")
-                asking = False
+                return getManual()
+            elif(ans == "range"):
+                return getRange()
         except:
-            print("oops\n\n\n")
-    print("\n"*80)
-mathHelper9000()
+            print("error: not a valid choice. - your options are 'manual' or 'range'.")
+            
+expression = getExpression()
+x = getXValues()
+
+# generate the ordered pairs
+for x in xValues:
+    y = eval(expression)
+    print(f"({x}, {y})")
