@@ -1,9 +1,14 @@
-from sympy import symbols, substitution 
+from simpleeval import simple_eval 
+import parser
 
 
-x = symbols('x')
-vals1 = [] #? Enter a list of values of x
-vals2 = [] #? init for looping
+#?  a list of values of x
+xValues = [] 
+
+#! CLEAR THE xValues LIST AND USE IT FOR MANUAL AND RANGE USER OPTIONS 
+#! THIS IS REDUNDANT 
+#? init for looping
+vals2 = [] 
 
 def doRng(minimum,maximum):
     #*ENTER RANGE (MIN,MAX+1)
@@ -25,9 +30,9 @@ def getExpression():
             print("oops... Try again \n")
     return exp
 
-def generateOrderedPairs(v=vals1):
+def generateOrderedPairs(v=xValues):
     for n in v:
-        print(f"({n}, {(expression)})")
+        print(f"({n}, {expression})") #! EXPRESSION WITH x SUBBED FOR AS THE y COORDINATE
         
 
 def mathHelper9000():
@@ -40,11 +45,11 @@ def mathHelper9000():
                     howMany = int(input("How many x values?: "))
                     for i in range(0,howMany):
                         nval = int(input("Enter an x value: "))
-                        vals1.append(nval)
+                        xValues.append(nval)
                 except: 
                     print("oops... \n\n\n\n")
                 print("\n")    
-                generateOrderedPairs(vals1) 
+                generateOrderedPairs(xValues) 
                 print("\n")
             elif (ans == "range"):
                 try:
@@ -58,10 +63,10 @@ def mathHelper9000():
                 generateOrderedPairs(vals2) 
                 print("\n")
             else:
-                print("kthxbai")
+                print("Exiting program...")
                 asking = False
         except:
-            print("oops\n\n\n")
+            print("oops... Try again\n")
             
     print("\n"*5)
     
